@@ -1,7 +1,7 @@
 const express = require('express');
 const request = require('request');
-const Blockchain = require('./Blockchain')
-const PubSub = require('./pubsub')
+const Blockchain = require('./blockchain')
+const PubSub = require('./lib/pubsub')
 
 const app = express();
 app.use(express.json());
@@ -12,10 +12,6 @@ const pubsub = new PubSub({ blockchain });
 const DEFAULT_PORT = 3000;
 
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
-
-setTimeout(() => {
-  pubsub.broadcastChain()
-}, 1000);
 
 app.get('/api/blocks', (req, res) => {
   res.send(blockchain.chain);
@@ -55,5 +51,8 @@ const PORT = PEER_PORT || DEFAULT_PORT;
 app.listen(PORT, () => {
   console.log(`Listening at localhost:${PORT}`);
 
-  syncChains();
+  if (PORT !== DEFAULT_PORT) {
+    syncChains();
+  }
+  
 })
