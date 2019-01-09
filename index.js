@@ -4,6 +4,7 @@ const Blockchain = require('./blockchain')
 const PubSub = require('./lib/pubsub')
 const TransactionPool = require('./wallet/transactionPool')
 const Wallet = require('./wallet');
+const TransactionMiner = require('./lib/transactionMiner')
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,7 @@ const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool });
+const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
 const DEFAULT_PORT = 3000;
 
@@ -39,7 +41,7 @@ app.post('/api/transact', (req, res) => {
     if (transaction) {
       transaction.update({ senderWallet: wallet, recipient, amount })
     } else {
-      transaction = wallet.createTransaction({ recipient, amount});
+      transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
     }
     
   } catch(error) {
@@ -56,6 +58,12 @@ app.post('/api/transact', (req, res) => {
 app.get('/api/transaction-pool-map', (req, res) => {
   res.send(transactionPool.transactionMap)
 
+})
+
+app.get('/api/mine-transactions', (req, res) => {
+  transactionMiner.mineTransactions();
+
+  res.redirect('/api/blocks');
 })
 
 const syncWithRootState = () => {
