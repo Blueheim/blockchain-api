@@ -14,7 +14,7 @@ describe('Transaction', () => {
     transaction = new Transaction({ senderWallet, recipient, amount})
   })
 
-  if('has an `id`', () => {
+  it('has an `id`', () => {
     expect(transaction).toHaveProperty('id');
   })
 
@@ -41,7 +41,7 @@ describe('Transaction', () => {
       expect(transaction.input).toHaveProperty('timestamp')
     })
 
-    it('sets the amount `amount` to the `senderWallet` balance', () => {
+    it('sets the `amount` to the `senderWallet` balance', () => {
       expect(transaction.input.amount).toEqual(senderWallet.balance);
     })
 
