@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-con
+const hexToBinary = require('hex-to-binary')
 
 // Hash function
 // JSON stringify to get unique entry and track all changes, especially needed for objects
