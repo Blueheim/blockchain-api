@@ -1,0 +1,41 @@
+@charset 'utf-8';
+
+@import 'node_modules/nostromo-css/sass/helpers/variables';
+@import 'node_modules/nostromo-css/sass/helpers/theme';
+
+/* Coolors Exported Palette - coolors.co/a57548-fcd7ad-f6c28b-333232-ff7e6b */
+
+/* HSL */
+$color1: hsla(29%, 39%, 46%, 1);
+$color2: hsla(32%, 93%, 83%, 1);
+$color3: hsla(31%, 86%, 75%, 1);
+$color4: hsla(0%, 1%, 20%, 1);
+$color5: hsla(8%, 100%, 71%, 1);
+
+/* RGB */
+$color1: rgba(165, 117, 72, 1);
+$color2: rgba(252, 215, 173, 1);
+$color3: rgba(246, 194, 139, 1);
+$color4: rgba(51, 50, 50, 1);
+$color5: rgba(255, 126, 107, 1);
+
+// Globals variables
+
+//Theming
+$myColors: (
+  'primary': $color1,
+  'secondary': $color2,
+  'tertiary': $color3,
+  'invalid': $color5,
+  'grey-dark-3': $color4,
+);
+
+$myFonts: (
+  'primary': 'Indie Flower',
+  'secondary': 'Indie Flower',
+);
+
+$colors: map-merge($colors, $myColors);
+$fonts: map-merge($fonts, $myFonts);
+
+@import 'node_modules/nostromo-css/default';
