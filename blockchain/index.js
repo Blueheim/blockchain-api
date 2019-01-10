@@ -4,6 +4,8 @@ const Wallet = require('../wallet')
 const { cryptoHash } = require('../util')
 const { REWARD_INPUT, MINING_REWARD } = require('../config');
 
+// Collects the blocks together in a chain array
+// Every block's lastHash fields must be equal to the hash field of the previous block
 
 class Blockchain {
   constructor() {
@@ -11,6 +13,8 @@ class Blockchain {
 
   }
 
+  // Add a block
+  // Create links between each block by adding the lastBlock reference
   addBlock({data}) {
     const newBlock = Block.mineBlock({
       lastBlock: this.chain[this.chain.length - 1],
@@ -20,6 +24,9 @@ class Blockchain {
     this.chain.push(newBlock);
   }
 
+  // If an incoming chain is longer than the current blockchain arrayand it's valid, 
+  // We need to replace the current blockchain array with the incoming one
+  // Mutltiple nodes in the network are able to agree on the longest version of the valid blockchain
   replaceChain(chain, validateTransactions, onSuccess) {
     if (chain.length <= this.chain.length) {
       console.error('The incoming chain must be longer');

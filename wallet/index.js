@@ -2,6 +2,11 @@ const Transaction = require('./Transaction')
 const { STARTING_BALANCE } = require('../config')
 const { ec, cryptoHash } = require('../util')
 
+// Allow multiple users to interact with each others in the cryptocurrency
+// Hold important keypair containing private/public keys
+// Public Key is the address to receive currency on the system
+// The private Key is secret an is used ffor generating unique signatures for data
+// Important, if we can use getPublic, better not use getPrivate and avoid possible leak
 class Wallet {
   constructor() {
     this.balance = STARTING_BALANCE;
@@ -30,6 +35,9 @@ class Wallet {
     return new Transaction({ senderWallet: this, recipient, amount });
   }
 
+  // The balance at any point of time is the output amount for that wallet as it most recent transaction
+  // In addition to any output amounts sent and received in the blockchain history after the most recent
+  // transaction
   static calculateBalance({
     chain,
     address

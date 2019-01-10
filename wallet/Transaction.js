@@ -2,6 +2,10 @@ const uuid = require('uuid/v1')
 const { verifySignature } = require('../util')
 const { REWARD_INPUT, MINING_REWARD } = require('../config')
 
+// Transactions are the official records of the exchange of currency between two wallets
+// The input map contains an official signature from the actual sender wallet
+// The output map contains any values that were conducted in the transaction like the recipient
+// and the remaining balance for the sender wallet afte these transactions
 class Transaction {
   constructor({ senderWallet, recipient, amount, outputMap, input }) {
     this.id = uuid();
