@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
+    "node-sass": "^4.11.0",
     "nostromo-css": "^0.2.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -27,7 +28,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "node-sass": "^4.11.0"
-  }
+  "devDependencies": {}
 }
