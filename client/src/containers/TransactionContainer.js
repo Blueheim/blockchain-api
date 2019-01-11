@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import { getFetchObservable } from '../util/asyncFunctions'
 
-class ConductTransaction extends Component {
-  state = { recipient: '', amount: 0 }
+class TransactionContainer extends Component {
+  state = { recipient: '', amount: 0, knownAddresses: [] }
+
+  componentDidMount() {
+    const fetchData$ = getFetchObservable(
+      '/api/known-addresses'); 
+
+    fetchData$.subscribe((fetchRes) => { 
+      this.setState({ knownAddresses: fetchRes });
+    });
+  }
 
   handleChangeRecipient = event => {
     this.setState({ recipient: event.target.value });
@@ -12,7 +21,7 @@ class ConductTransaction extends Component {
     this.setState({ amount: Number(event.target.value) });
   }
 
-  conductTransaction = (event) => {
+  PerformTransaction = (event) => {
     event.preventDefault();
     
     const { recipient, amount } = this.state;
@@ -36,28 +45,42 @@ class ConductTransaction extends Component {
 
   render() {
     return (
-      <div className='ConductTransaction m-mg-md'>
-        <form onSubmit={this.conductTransaction}>
+      <section className='l-section l-section--simple m-mg-xt'>
+        <div className="known-adresses m-pd-xt m-fs-ty">
+          <div className="m-mg-xt-b m-secondary">Known addresses to be copy/paste</div>
+          {
+          this.state.knownAddresses.map(knownAddress => {
+            return (
+              <div key={knownAddress}>
+                <div>{knownAddress}</div>
+                <br />
+              </div>
+            )
+          })
+          }
+        </div>
+        
+        <form className="transact-form m-mg-xt" onSubmit={this.performTransaction}>
           <div className="control m-mg-xt-b">
             <input type="text" 
               placeholder="recipient" 
               value={this.state.recipient} 
               onChange={this.handleChangeRecipient}
-              className="control__input m-tx-grey-dark-1" />
+              className="control__input m-rd-xx m-tx-grey-dark-1" />
           </div>
           <div className="control">
               <input type="number" 
               value={this.state.amount} 
               onChange={this.handleChangeAmount}
-              className="control__input m-tx-grey-dark-1" />
+              className="control__input m-rd-xx m-tx-grey-dark-1" />
           </div>
-          <button className="m-alert m-pd-xt">
-            Submit
+          <button className="m-alert m-pd-xt m-rd-xx m-mg-xt-t">
+            Send
           </button>
         </form>
-      </div>
+      </section>
     )
   }
 }
 
-export default ConductTransaction
+export default TransactionContainer

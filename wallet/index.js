@@ -42,7 +42,7 @@ class Wallet {
     chain,
     address
   }) {
-    let hasConductedTransaction = false;
+    let hasPerformedTransaction = false;
     let outputsTotal = 0;
 
     for(let i=chain.length-1; i>0; i--) {
@@ -50,7 +50,7 @@ class Wallet {
 
       for(let transaction of block.data) {
         if(transaction.input.address === address) {
-          hasConductedTransaction = true;
+          hasPerformedTransaction = true;
         }
         const addressOutput = transaction.outputMap[address];
 
@@ -59,12 +59,12 @@ class Wallet {
         }
       }
 
-      if(hasConductedTransaction) {
+      if(hasPerformedTransaction) {
         break;
       }
     }
 
-    return hasConductedTransaction ? outputsTotal : STARTING_BALANCE + outputsTotal;
+    return hasPerformedTransaction ? outputsTotal : STARTING_BALANCE + outputsTotal;
   }
 }
 

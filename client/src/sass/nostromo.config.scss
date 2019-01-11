@@ -1,23 +1,19 @@
 @charset 'utf-8';
 
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto:400,700');
+
 @import 'node_modules/nostromo-css/sass/helpers/variables';
 @import 'node_modules/nostromo-css/sass/helpers/theme';
 
 /* Coolors Exported Palette - coolors.co/2364aa-50514f-5b507a-fffcff-c3b299 */
 
 /* HSL */
-$color1: hsla(211%, 66%, 40%, 1);
+$color1: hsla(201%, 60%, 15%, 1);
 $color2: hsla(90%, 1%, 31%, 1);
 $color3: hsla(256%, 21%, 40%, 1);
 $color4: hsla(300%, 100%, 99%, 1);
 $color5: hsla(36%, 26%, 68%, 1);
 
-/* RGB */
-$color1: rgba(35, 100, 170, 1);
-$color2: rgba(80, 81, 79, 1);
-$color3: rgba(91, 80, 122, 1);
-$color4: rgba(255, 252, 255, 1);
-$color5: rgba(195, 178, 153, 1);
 
 // Globals variables
 
@@ -32,8 +28,8 @@ $myColors: (
 );
 
 $myFonts: (
-  'primary': 'Indie Flower',
-  'secondary': 'Indie Flower',
+  'primary': 'Roboto',
+  'secondary': 'Raleway',
 );
 
 $colors: map-merge($colors, $myColors);

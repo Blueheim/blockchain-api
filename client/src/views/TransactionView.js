@@ -1,16 +1,16 @@
 import React from 'react';
 import Nav from '../components/Nav';
-import BlocksContainer from '../containers/BlocksContainer';
+import TransactionContainer from '../containers/TransactionContainer';
 
-const BlocksView = () => {
+const TransactionView = () => {
   return (
     <>
     <Nav />
     <main className="l-main m-primary App-main">
-      <BlocksContainer />
+      <TransactionContainer />
     </main>
     </>
   )
 };
 
-export default BlocksView
+export default TransactionView

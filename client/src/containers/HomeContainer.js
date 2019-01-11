@@ -21,15 +21,22 @@ class HomeContainer extends Component {
     const { address, balance } = this.state.walletInfo;
 
     return (
-      <div>
-        <h1 className="m-tx-c m-mg-md-b">
-           Welcome to the blockchain
-        </h1>
-        <div className="Wallet m-mg-md-b m-tx-c">
-           <div>Address: {address}</div>
-          <div>Balance: {balance}</div>
+      <section className="l-section l-section--simple home">
+        <div className="m-fx-en-c">
+          <div className="home__content m-pd-xt-h">
+              <h1 className="title-4 m-fs-xs m-mg-md-b">
+                Blockchain sandbox
+              </h1>
+              <div className="Wallet m-mg-md-b m-primary">
+                <div className="m-wt-700 m-info m-rd-xt-t m-pd-ty">Your crypto-wallet</div>
+                <div>Address:</div>
+                <div>{address}</div>
+                <div>Balance: {balance}</div>
+              </div>
+          </div>
+        
         </div>
-      </div>
+      </section>
     )
   }
 }

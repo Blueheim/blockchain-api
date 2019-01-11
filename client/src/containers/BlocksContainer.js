@@ -4,11 +4,27 @@ import BlockContainer from './BlockContainer'
 
 class BlocksContainer extends Component {
   state = { 
-    blocks: []
+    blocks: [],
+    paginatedId: 1,
+    blocksLength: 0
   }
 
   componentDidMount() {
-    const fetchData$ = getFetchObservable('/api/blocks'); 
+    this.fetchBlocksLength() ;
+    this.fetchPaginatedBlocks(this.state.paginatedId)
+  }
+
+  fetchBlocksLength = () => {
+    const fetchData$ = getFetchObservable(`/api/blocks/length`); 
+
+    fetchData$.subscribe((fetchRes) => { 
+      this.setState({ blocksLength: fetchRes });
+    });
+  }
+
+  fetchPaginatedBlocks = (paginatedId) => {
+    const fetchData$ = getFetchObservable(`/api/blocks/${paginatedId}`); 
+
     fetchData$.subscribe((fetchRes) => { 
       this.setState({ blocks: fetchRes });
     });
@@ -16,18 +32,35 @@ class BlocksContainer extends Component {
 
   render() {
     return (
-      <div className="m-fx-cl-c-c">
-        <h3>Blocks</h3>
-        {
-          this.state.blocks.map(block => {
-            return (
-              <BlockContainer 
-                key={block.hash} 
-                block={block} />
-            )
-          })
-        }
-      </div>
+      <section className="l-section l-section--simple">
+         <h3>Blocks</h3>
+        <div className="block-pagination">
+        <div>
+          {
+            [...Array(Math.ceil(this.state.blocksLength / 5)).keys()].map(key => {
+              const paginatedId = key + 1;
+              return (
+                <span key={key} onClick={() => this.fetchPaginatedBlocks(paginatedId)}>
+                  <button className="m-alert m-pd-xt">{paginatedId}</button>{' '}
+                </span>
+              )
+            })
+          }
+        </div>
+        </div>
+        <div className="block-list">
+          {
+            this.state.blocks.map(block => {
+              return (
+                <BlockContainer 
+                  key={block.hash} 
+                  block={block} />
+              )
+            })
+          }
+        </div>
+
+      </section>
     )
   }
 }

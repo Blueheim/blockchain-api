@@ -25,7 +25,26 @@ const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wal
 
 
 app.get('/api/blocks', (req, res) => {
-  res.send(blockchain.chain);
+  res.json(blockchain.chain);
+})
+
+app.get('/api/blocks/length', (req, res) => {
+  res.json(blockchain.chain.length);
+})
+
+app.get('/api/blocks/:id', (req, res) => {
+  const { id } = req.params;
+  const { length } = blockchain.chain;
+
+  const blocksReversed = blockchain.chain.slice().reverse();
+
+  let startIndex = (id - 1) * 5;
+  let endIndex = id * 5;
+
+  startIndex = startIndex < length ? startIndex : length;
+  endIndex = endIndex < length ? endIndex : length;
+
+  res.json(blocksReversed.slice(startIndex, endIndex));
 })
 
 app.post('/api/mine', (req, res) => {
@@ -58,11 +77,11 @@ app.post('/api/transact', (req, res) => {
 
   pubsub.broadcastTransaction(transaction);
 
-  res.send({ type: 'success', transaction });
+  res.json({ type: 'success', transaction });
 })
 
 app.get('/api/transaction-pool-map', (req, res) => {
-  res.send(transactionPool.transactionMap)
+  res.json(transactionPool.transactionMap)
 })
 
 app.get('/api/mine-transactions', (req, res) => {
@@ -78,6 +97,21 @@ app.get('/api/wallet-info', (req, res) => {
     address,
     balance: Wallet.calculateBalance({ chain: blockchain.chain, address})
   })
+})
+
+app.get('/api/known-addresses', (req, res) => {
+  const addressMap = {};
+
+  for(let block of blockchain.chain) {
+    for(let transaction of block.data) {
+      const recipient = Object.keys(transaction.outputMap);
+
+      recipient.forEach(recipient => addressMap[recipient] = recipient)
+    }
+  }
+
+  res.json(Object.keys(addressMap));
+
 })
 
 //if (process.env.NODE_ENV === 'production'){
@@ -135,7 +169,7 @@ if (isDevelopment) {
     wallet: walletBar, recipient: wallet.publicKey, amount: 15
   })
 
-  for (let i=0; i<10; i++) {
+  for (let i=0; i<20; i++) {
     if (i%3 === 0)
     {
     walletAction();

@@ -1,26 +1,50 @@
 // Layout configuration
 body {
   word-wrap: break-word;
+  min-height: 100vh;
 }
 
-.App-header {
-  height: 6rem;
+.App {
+  grid-template-rows: auto;
 }
 
 .App-main {
-  height: calc(100vh - (6rem + 4rem));
-  overflow-y: auto;
+  min-height: calc(100vh - (5vh));
+  background-color: #0E2C3C;
 }
 
 .App-footer {
-  height: 4rem;
+  height: 5vh;
 }
 
-.Wallet {
-  margin: auto;
-  width: 50%;
+.nav__action {
+
+  .active {
+    border-bottom: 1px solid white;
+  }
 }
 
-.Block {
+.home {
+  background: url('../assets/blockchain-bg.png'), #0E2C3C;
+  background-size: cover;
+  background-position: center;
+
+  &__content {
+    flex: none;
+    width: 40%;
+  }
+}
+
+
+.block-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
+}
+
+.known-adresses {
+  width: 90%;
+}
+
+.transact-form {
   width: 90%;
 }
