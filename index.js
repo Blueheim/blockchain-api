@@ -2,13 +2,13 @@ const path = require('path');
 const config = require('config');
 const express = require('express');
 const request = require('request');
-const Blockchain = require('./blockchain')
-const PubSub = require('./lib/pubsub')
-const TransactionPool = require('./wallet/transactionPool')
+const Blockchain = require('./blockchain');
+const PubSub = require('./lib/pubsub');
+const TransactionPool = require('./wallet/TransactionPool');
 const Wallet = require('./wallet');
-const TransactionMiner = require('./lib/transactionMiner')
+const TransactionMiner = require('./lib/transactionMiner');
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const DEFAULT_PORT = 5000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
