@@ -1,0 +1,26 @@
+// Layout configuration
+body {
+  word-wrap: break-word;
+}
+
+.App-header {
+  height: 6rem;
+}
+
+.App-main {
+  height: calc(100vh - (6rem + 4rem));
+  overflow-y: auto;
+}
+
+.App-footer {
+  height: 4rem;
+}
+
+.Wallet {
+  margin: auto;
+  width: 50%;
+}
+
+.Block {
+  width: 90%;
+}

@@ -3,21 +3,21 @@
 @import 'node_modules/nostromo-css/sass/helpers/variables';
 @import 'node_modules/nostromo-css/sass/helpers/theme';
 
-/* Coolors Exported Palette - coolors.co/a57548-fcd7ad-f6c28b-333232-ff7e6b */
+/* Coolors Exported Palette - coolors.co/2364aa-50514f-5b507a-fffcff-c3b299 */
 
 /* HSL */
-$color1: hsla(29%, 39%, 46%, 1);
-$color2: hsla(32%, 93%, 83%, 1);
-$color3: hsla(31%, 86%, 75%, 1);
-$color4: hsla(0%, 1%, 20%, 1);
-$color5: hsla(8%, 100%, 71%, 1);
+$color1: hsla(211%, 66%, 40%, 1);
+$color2: hsla(90%, 1%, 31%, 1);
+$color3: hsla(256%, 21%, 40%, 1);
+$color4: hsla(300%, 100%, 99%, 1);
+$color5: hsla(36%, 26%, 68%, 1);
 
 /* RGB */
-$color1: rgba(165, 117, 72, 1);
-$color2: rgba(252, 215, 173, 1);
-$color3: rgba(246, 194, 139, 1);
-$color4: rgba(51, 50, 50, 1);
-$color5: rgba(255, 126, 107, 1);
+$color1: rgba(35, 100, 170, 1);
+$color2: rgba(80, 81, 79, 1);
+$color3: rgba(91, 80, 122, 1);
+$color4: rgba(255, 252, 255, 1);
+$color5: rgba(195, 178, 153, 1);
 
 // Globals variables
 
@@ -26,8 +26,9 @@ $myColors: (
   'primary': $color1,
   'secondary': $color2,
   'tertiary': $color3,
-  'invalid': $color5,
-  'grey-dark-3': $color4,
+  'font-primary': $color4,
+  'font-secondary': $color4,
+  'white': $color4
 );
 
 $myFonts: (
