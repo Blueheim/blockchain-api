@@ -8,14 +8,15 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "start": "npm run build:client & node index.js",
+    "start": "node index.js",
     "test": "jest --watchAll",
     "start-redis": "redis-server --daemonize yes",
     "dev:api": "npm run start-redis && cross-env nodemon --ignore 'client/*' index.js",
     "dev:api-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
     "dev:client": "npm run start --prefix client",
     "dev": "npm-run-all --parallel dev:api dev:client",
-    "build:client": "npm run build --prefix client"
+    "build:client": "npm run build --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build:client"
   },
   "jest": {
     "testEnvironment": "node"
