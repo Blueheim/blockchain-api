@@ -1,6 +1,5 @@
 const Transaction = require('./Transaction')
 
-
 // Collect transactions and update them 
 // Replace the entire transaction map if needed
 class TransactionPool {
